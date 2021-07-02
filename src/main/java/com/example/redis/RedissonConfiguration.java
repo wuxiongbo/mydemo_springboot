@@ -26,7 +26,7 @@ import java.util.Map;
  * </pre>
  */
 @Slf4j
-@Configuration
+//@Configuration
 public class RedissonConfiguration {
 
     @Value("${myconfig.redis.addr}")
@@ -51,13 +51,4 @@ public class RedissonConfiguration {
         return Redisson.create(config);
     }
 
-    public static void main(String[] args){
-        Config config = new Config();
-        config.setCodec(new JsonJacksonCodec());
-        config.useSingleServer().setAddress("redis://127.0.0.1:15235").setDatabase(0);
-        RedissonClient redissonClient = Redisson.create(config);
-        RBuckets buckets = redissonClient.getBuckets();
-        Map<String, Object> user = buckets.get("user");
-        System.out.println(user);
-    }
 }
