@@ -2,6 +2,9 @@ package com.example.mongodb;
 
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.validation.Valid;
+
 /**
  * <p>产品</p>
  *
@@ -16,6 +19,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Product {
     String sku;
     Integer quantity;
+//    @Valid // 嵌套验证必须用@Valid
     Metric metrics;
 
     @Data
