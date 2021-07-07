@@ -1,12 +1,11 @@
 package com.outside;
 
-import com.outside.Student;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
 
 /**
- * <p>描述类的信息</p>
+ * <p> 自定义注解 </p>
  *
  * <pre>
  * @author wuxiongbo
@@ -14,9 +13,11 @@ import java.lang.annotation.*;
  * </pre>
  */
 
+// 这两个元注解不能少，否则 通过自定义注解 加载bean失败。
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Documented
+
+//@Documented
 // 将Student 托管给spring
 @Import(Student.class)
 public @interface StudentAnnotation {

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
- * <p> 通过自定注解指定类托管给spring </p>
+ * <p> 通过 自定注解将指定类 交给spring托管 </p>
  *
  * <pre>
  * @author wuxiongbo
