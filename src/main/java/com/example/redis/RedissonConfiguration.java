@@ -2,23 +2,20 @@ package com.example.redis;
 
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
-import org.redisson.api.RBuckets;
 import org.redisson.api.RedissonClient;
-import org.redisson.client.codec.StringCodec;
-import org.redisson.codec.JsonJacksonCodec;
-import org.redisson.codec.TypedJsonJacksonCodec;
+
 import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
+import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.Map;
+
 
 /**
- * <p>描述类的信息</p>
+ * <p>redisson的配置类</p>
  *
  * <pre>
  * @author wuxiongbo
@@ -26,7 +23,7 @@ import java.util.Map;
  * </pre>
  */
 @Slf4j
-//@Configuration
+@Configuration
 public class RedissonConfiguration {
 
     @Value("${myconfig.redis.addr}")
@@ -43,11 +40,19 @@ public class RedissonConfiguration {
     // https://stackoverflow.com/questions/45547557/redisson-spring-unexpected-exception-while-processing-command
     @Bean
     public RedissonClient redisson() throws IOException {
-        Config config = new Config();
-        // 用String编解码器。否则会报错。
-        config.setCodec(new StringCodec());
-//        config.setCodec(new TypedJsonJacksonCodec(String.class, new JsonJacksonCodec().getObjectMapper()));
-        config.useSingleServer().setAddress(addr).setDatabase(database);
+//        Config config = new Config();
+
+
+        // ClassPathResource类的构造方法接收路径名称，自动去classpath路径下找文件
+        ClassPathResource classPathResource = new ClassPathResource("redisson.yaml");
+        // 获得File对象，当然也可以获取输入流对象
+        File file = classPathResource.getFile();
+        Config config = Config.fromYAML(file);
+
+        config.useSingleServer()
+                .setAddress(addr)
+                .setDatabase(database);
+
         return Redisson.create(config);
     }
 

@@ -1,0 +1,6 @@
+#transportMode: NIO
+#codec:
+#  class: org.redisson.codec.JsonJacksonCodec
+
+codec: !<org.redisson.codec.JsonJacksonCodec> {}
+"transportMode": "NIO"

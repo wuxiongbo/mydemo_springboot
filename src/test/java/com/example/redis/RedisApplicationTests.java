@@ -28,12 +28,13 @@ import java.util.concurrent.TimeUnit;
 @SpringBootTest
 @Slf4j
 public class RedisApplicationTests {
-    @Autowired
-    private RedisTemplate redisTemplate;
+
     @Autowired
     private RedissonClient redissonClient;
 
-
+    /**
+     * 如果不设置redisson的序列化方式，这里会报错
+     */
     @Test
     void stringTest(){
 
@@ -109,6 +110,23 @@ public class RedisApplicationTests {
         // delete hash
         redissonClient.getBucket("hashTest").delete();
         redissonClient.getList("listTest").delete();
+    }
+
+
+    /**
+     * 如果不设置redisson的序列化方式，这里会报错
+     */
+    @Test
+    void beforeIncrement(){
+        RBucket<Object> bucket = redissonClient.getBucket("incrementTest");
+        Object result = bucket.get();
+        System.out.println(result);
+    }
+    @Test
+    void increment(){
+        RAtomicLong atomicLong = redissonClient.getAtomicLong("incrementTest");
+        long value = atomicLong.incrementAndGet();
+        System.out.println(value);
     }
 
 }
