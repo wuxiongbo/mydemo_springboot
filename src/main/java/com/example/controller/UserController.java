@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * <p>描述类的信息</p>
+ * <p>swagger2 演示案例</p>
  *
  * @Api注解 用来标记当前Controller的功能。
  * @ApiOperation注解 用来标记一个方法的作用。
@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
  * 注意：@ApiImplicitParam注解中虽然可以指定参数是必填的，但是却不能代替@RequestParam(required = true)，
  *      前者的必填只是在Swagger2框架内必填，抛弃了Swagger2，这个限制就没用了，
  *      所以假如开发者需要指定一个参数必填，@RequestParam(required = true)注解还是不能省略。
+ *
+ * https://blog.csdn.net/u012702547/article/details/88775298
  *
  * <pre>
  * @author wuxiongbo

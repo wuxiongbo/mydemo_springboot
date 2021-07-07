@@ -1,6 +1,7 @@
 package com.example.swagger2;
 
 import io.swagger.annotations.ApiOperation;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -24,10 +25,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @Configuration
 @EnableSwagger2
+// 使用注解@ConditionalOnProperty
+@ConditionalOnProperty(prefix = "swagger",value = {"enable"},havingValue = "true")
 public class SwaggerConfig {
     @Bean
     public Docket createRestApi() {
-
         return new Docket(DocumentationType.SWAGGER_2)
                 .pathMapping("/")
                 .select()
@@ -35,11 +37,11 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 .paths(PathSelectors.any())
                 .build()
-                .apiInfo(getApiInfo());
+                .apiInfo(apiInfo());
     }
 
 
-    private ApiInfo getApiInfo() {
+    private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("标题演示：SpringBoot整合Swagger")
                 .description("描述：SpringBoot整合Swagger，详细文档信息......")
@@ -49,5 +51,6 @@ public class SwaggerConfig {
                 .licenseUrl("http://www.baidu.com")
                 .build();
     }
+
 
 }
