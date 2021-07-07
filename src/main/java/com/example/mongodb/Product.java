@@ -2,9 +2,6 @@ package com.example.mongodb;
 
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.List;
-
 /**
  * <p>产品</p>
  *
@@ -14,6 +11,7 @@ import java.util.List;
  * </pre>
  */
 @Data
+// mongo文档
 @Document("products")
 public class Product {
     String sku;

@@ -13,11 +13,12 @@ import java.lang.annotation.*;
  * </pre>
  */
 
+//@Documented
+
 // 这两个元注解不能少，否则 通过自定义注解 加载bean失败。
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 
-//@Documented
 // 将Student 托管给spring
 @Import(Student.class)
 public @interface StudentAnnotation {

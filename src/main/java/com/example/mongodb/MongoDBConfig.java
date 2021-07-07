@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 /**
- * <p>描述类的信息</p>
+ * <p> MongoDB配置类 </p>
  *
  * <pre>
  * @author wuxiongbo
@@ -16,13 +16,22 @@ import org.springframework.data.mongodb.core.MongoTemplate;
  */
 @Configuration
 public class MongoDBConfig {
-     @Bean
-     public MongoClient mongoClient() {
+
+    /**
+     * 1.建立 连接客户端
+     * @return
+     */
+    @Bean
+    public MongoClient mongoClient() {
         return MongoClients.create("mongodb://localhost:27017");
     }
 
-     @Bean
-     public MongoTemplate mongoTemplate() {
+    /**
+     * 2.操作类MongoTemplate
+     * @return
+     */
+    @Bean
+    public MongoTemplate mongoTemplate() {
         return new MongoTemplate(mongoClient(), "mycs");
     }
 }
