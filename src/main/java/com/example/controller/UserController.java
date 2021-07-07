@@ -27,12 +27,15 @@ import org.springframework.web.bind.annotation.*;
  * </pre>
  */
 @RestController
-@Api(tags = "用户管理相关接口")
 @RequestMapping("/user")
+// 用来标记当前Controller的功能
+@Api(tags = "用户管理相关接口")
 public class UserController {
 
     @PostMapping("/add")
+//    用来标记方法的作用。
     @ApiOperation("添加用户的接口")
+//    用来描述一个参数，可以配置参数的中文含义，也可以给参数设置默认值
     @ApiImplicitParams({
             @ApiImplicitParam(name = "username", value = "用户名", defaultValue = "李四"),
             @ApiImplicitParam(name = "address", value = "用户地址", defaultValue = "深圳", required = true)

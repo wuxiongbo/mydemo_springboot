@@ -12,6 +12,10 @@ import lombok.Data;
  * @date 2021/7/7
  * </pre>
  */
+
+// 不指定value， 显示类名 user，
+// 指定value， 显示中文含义  "用户实体"
+//@ApiModel("用户实体")
 @ApiModel
 @Data
 public class User {
