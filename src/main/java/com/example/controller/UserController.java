@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
  * <p>swagger2 演示案例</p>
  *
  * @Api注解 用来标记当前Controller的功能。
- * @ApiOperation注解 用来标记一个方法的作用。
+ * @ApiOperation注解 用来描述一个方法的作用。
  * @ApiImplicitParam注解 用来描述一个参数，可以配置参数的中文含义，也可以给参数设置默认值，这样在接口测试的时候可以避免手动输入。
  *                      如果有多个参数，则需要使用多个@ApiImplicitParam注解来描述，
  *                      多个@ApiImplicitParam注解需要放在一个@ApiImplicitParams注解中。
@@ -33,17 +33,18 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @PostMapping("/add")
-//    用来标记方法的作用。
+
+//    用来描述方法。
     @ApiOperation("添加用户的接口")
-//    用来描述一个参数，可以配置参数的中文含义，也可以给参数设置默认值
+//    用来描述参数。可以配置参数的中文含义，也可以给参数设置默认值
     @ApiImplicitParams({
             @ApiImplicitParam(name = "username", value = "用户名", defaultValue = "李四"),
             @ApiImplicitParam(name = "address", value = "用户地址", defaultValue = "深圳", required = true)
     })
+
     public String addUser(
             @RequestParam("username")String username,
-            @RequestParam(value = "address",required = true) String address)
-    {
+            @RequestParam(value = "address",required = true) String address){
         return "success";
     }
 

@@ -30,13 +30,16 @@ import lombok.Data;
  * </pre>
  */
 
-// 不指定value， 显示类名 user，
-// 指定value， 显示中文含义  "用户实体"
-//@ApiModel("用户实体")
+// @ApiModel注解，在swagger中，用来描述实体类。
+//    不指定value， 显示类名 user，
+//    指定value， 显示中文含义  "用户实体"
+// @ApiModel("用户实体")
 @ApiModel
 @Data
 public class User {
-
+    /**
+     * @ApiModelProperty 用于描述属性
+     */
     @ApiModelProperty(value = "用户id")
     private Integer id;
     @ApiModelProperty(value = "用户名")
