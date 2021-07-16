@@ -42,6 +42,7 @@ public class RedissonConfiguration {
     public RedissonClient redisson() throws IOException {
 //        Config config = new Config();
 
+        // 加载redisson的json编解码器，需要使用 通过加载yaml配置文件创建放入配置类 才行，具体原因不详。
         // ClassPathResource类的构造方法接收路径名称，自动去classpath路径下找文件
         ClassPathResource classPathResource = new ClassPathResource("redisson.yaml");
         // 获得File对象，当然也可以获取输入流对象
