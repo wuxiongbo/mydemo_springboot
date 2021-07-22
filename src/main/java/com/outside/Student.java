@@ -1,8 +1,6 @@
 package com.outside;
 
 import lombok.Data;
-import org.springframework.stereotype.Component;
-
 /**
  * <p>描述类的信息</p>
  *

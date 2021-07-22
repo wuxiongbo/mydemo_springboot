@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
- * <p> 通过 自定注解将指定类 交给spring托管 </p>
+ * <p> 通过 自定注解将扫描范围以外的指定类 交给spring托管 </p>
+ *
+ * @StudentAnnotation  自定义注解
+ * com.outside.Student  springboot扫描范围之外的类
  *
  * <pre>
  * @author wuxiongbo

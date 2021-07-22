@@ -15,11 +15,14 @@ import java.lang.annotation.*;
 
 //@Documented
 
-// 这两个元注解不能少，否则 通过自定义注解 加载bean失败。
-@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
+// 这两个 “元注解” 不能少，否则 通过自定义注解 加载bean失败。
+
+@Target(ElementType.TYPE) //使用位置 （TYPE 类，METHOD 方法）
+@Retention(RetentionPolicy.RUNTIME) //加载到jvm里运行
 
 // 将Student 托管给spring
 @Import(Student.class)
 public @interface StudentAnnotation {
+    String value() default "";           //注解的属性。 如果只有一个属性，一般叫value
+    String name() default ""; //注解的属性。 默认值""，可以不写
 }

@@ -1,9 +1,11 @@
 package com.example.controller;
 
+import com.example.annotation.Clc;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -30,10 +32,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 // 用来标记当前Controller的功能
 @Api(tags = "用户管理相关接口")
+@Log4j2
 public class UserController {
 
     @PostMapping("/add")
-
 //    用来描述方法。
     @ApiOperation("添加用户的接口")
 //    用来描述参数。可以配置参数的中文含义，也可以给参数设置默认值
@@ -41,13 +43,22 @@ public class UserController {
             @ApiImplicitParam(name = "username", value = "用户名", defaultValue = "李四"),
             @ApiImplicitParam(name = "address", value = "用户地址", defaultValue = "深圳", required = true)
     })
-
     public String addUser(
-            @RequestParam("username")String username,
-            @RequestParam(value = "address",required = true) String address){
+            @RequestParam("username")
+                    String username,
+
+            @RequestParam(value = "address",required = true)
+                    String address)
+    {
         return "success";
     }
 
+    /**
+     * @RequestParam 修饰 get请求的参数
+     *
+     * @param id
+     * @return
+     */
     @GetMapping("/get")
     @ApiOperation("根据id查询用户的接口")
     @ApiImplicitParam(name = "id", value = "用户id", defaultValue = "99", required = true)
@@ -58,14 +69,33 @@ public class UserController {
     }
 
     /**
+     * @RequestBody  修饰 post请求的参数
+     *
      * 如果参数是一个对象，对于参数的描述也可以放在 实体类User 中
      * @param user
      * @return
      */
     @PutMapping("/update/{id}")
     @ApiOperation("根据id更新用户的接口")
-    public User updateUserById(@RequestBody User user) {
+    public User updateUserById(@RequestBody User user, @PathVariable Integer id) {
+        user.setId(id);
         return user;
+    }
+
+
+    /**
+     * 测试 自定义注解 aop
+     */
+    @Clc(value = "value_demo", name = "name_demo")
+    @RequestMapping(value = "/annotation", method = RequestMethod.GET)
+    public String annotationDemo(@RequestParam("id")Integer id,@RequestParam("address")String address) {
+        System.out.println("===开始执行 annotationDemo方法===");
+
+        System.out.println("id:"+id);
+        System.out.println("address:"+address);
+
+        System.out.println("===结束执行 annotationDemo方法===");
+        return "success";
     }
 
 }
