@@ -1,5 +1,6 @@
 package com.example.annotation;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -8,8 +9,10 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.DefaultParameterNameDiscoverer;
 import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.beans.PropertyDescriptor;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.List;
 
@@ -71,10 +74,11 @@ public class ClcAop {
         try {
 
             System.out.println("触发 @Around(\"auditAspect()\")，before  proceed()");
+            System.out.println("=================================================");
 
             result = joinPoint.proceed();
 
-            Thread.sleep(10000);
+            System.out.println("=================================================");
             System.out.println("触发 @Around(\"auditAspect()\")，after  proceed() ");
 
         } catch (Throwable throwable) {
@@ -114,7 +118,7 @@ public class ClcAop {
 
     /**
      * 获取注解中对方法的描述信息
-     *
+     *     全部信息均从 JoinPoint 中获取
      * @param joinPoint 切点
      * @return 方法描述
      */
@@ -140,6 +144,9 @@ public class ClcAop {
         if (!(signature instanceof MethodSignature)) {
             throw new IllegalArgumentException("该注解只能用于方法");
         }
+
+
+
         MethodSignature methodSignature = (MethodSignature) signature;
         Method targetMethod = methodSignature.getMethod();
         String targetMethodName = targetMethod.getName();
@@ -185,6 +192,22 @@ public class ClcAop {
             //  具体原因不清楚。
 
 
+            //还可以获取方法参数上的注解。
+            // https://www.cnblogs.com/kelelipeng/p/12009680.html
+            //获取方法的所有参数注解。
+            Annotation[][] parameterAnnotations = targetMethod1.getParameterAnnotations();
+            for (Annotation[] parameterAnnotation: parameterAnnotations) {
+                int paramIndex= ArrayUtils.indexOf(parameterAnnotations, parameterAnnotation);
+                System.out.println("参数的值："+arguments[paramIndex]);
+                for (Annotation annotation1 : parameterAnnotation) {
+                    if (annotation1 instanceof RequestParam){
+                        String value = ((RequestParam) annotation1).value();
+                        System.out.println("参数上注解的值："+value);
+                    }
+                }
+            }
+
+
             // 打印后可以看出，获取的annotation 实际上是 Clc 的代理类。
             annotationName = annotation.getClass().getName();
             System.out.println("方式一获取的 注解名"+annotationName);
@@ -210,7 +233,7 @@ public class ClcAop {
                 }
             }
 
-            // 获取注解各个属性的值
+            // 获取方法注解 各个属性的值
             String  value = annotation.value();
             String  name = annotation.name();
 
