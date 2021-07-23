@@ -151,9 +151,9 @@ public class ClcAop {
         Method targetMethod = methodSignature.getMethod();
         String targetMethodName = targetMethod.getName();
         System.out.println("MethodSignature 获取的方法名："+targetMethodName);
-            // 获取方法的入参类型
+            // 获取方法的  入参  类型
         Class[] parameterTypes = targetMethod.getParameterTypes();
-            // 获取方法的返回值类型
+            // 获取方法的  返回值  类型
         Class<?> returnType = targetMethod.getReturnType();
 
            //获得执行方法的方法名方式一（短名）：直接通过 Signature 签名获取 methodName
@@ -247,8 +247,8 @@ public class ClcAop {
 
 
     /**
-     * 本示例的切点为
-     *   方法：    com.example.controller.UserController#annotationDemo
+     * 本示例的切点为  annotationDemo 方法。
+     *   方法全名： com.example.controller.UserController#annotationDemo
      *   方法参数：(Integer id,String address)
      *
      *   parameterNames 存的是 参数名，即 "id"、"address"
@@ -261,7 +261,7 @@ public class ClcAop {
     private Object[] argValues;
 
     private Object resolveFromObject() {
-        String key = "UserInfo.id";
+        String key = "userInfo.id";
         String[] split = key.split("\\.");
         // 参数1   类名  UserInfo
         String className = split[0];
@@ -270,17 +270,17 @@ public class ClcAop {
 
         // 参数1 UserInfo 的实例
         int classNameIndex = parameterNames.indexOf(className);
-        Object instance= argValues[classNameIndex];
+        Object classInstance= argValues[classNameIndex];
         // 参数1 UserInfo 的类型  com.example.annotation.UserInfo
-        Class<?> clazz = instance.getClass();
+        Class<?> clazz = classInstance.getClass();
 
         try {
-            // 获取 实例UserInfo 的 id属性  的值
+            // 获取 实例 userInfo 属性id  的值
             PropertyDescriptor propertyDescriptor = new PropertyDescriptor(propertyName, clazz);
             Method readMethod = propertyDescriptor.getReadMethod();
-            Object value = readMethod.invoke(instance);
+            Object propertyValue = readMethod.invoke(classInstance);
 
-            return value;
+            return propertyValue;
 
 
         } catch (Exception e) {
