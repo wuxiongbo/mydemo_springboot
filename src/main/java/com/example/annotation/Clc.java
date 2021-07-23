@@ -10,6 +10,10 @@ import java.lang.annotation.Target;
  * <pre>
  * @author wuxiongbo
  * @date 2021/7/21
+ *
+ *
+ * https://www.cnblogs.com/chenglc/p/9642891.html
+ *
  * </pre>
  */
 @Target(value = {ElementType.TYPE, ElementType.METHOD})//使用位置（类，方法）
