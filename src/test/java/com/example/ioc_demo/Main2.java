@@ -9,7 +9,7 @@ import org.springframework.core.io.support.ResourcePatternUtils;
 import java.io.IOException;
 
 /**
- * <p>描述类的信息</p>
+ * <p>扫描器</p>
  *
  * <pre>
  * @author wuxiongbo

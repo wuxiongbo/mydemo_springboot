@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
 // Lite配置类
 //@Component
 
-//@ComponentScan("com.example.config.bean")
+@ComponentScan("com.example.config.bean")
 //@Import({C.class,B.class})
 public class MainConfig {
 
