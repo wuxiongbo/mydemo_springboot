@@ -17,7 +17,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 /**
- * <p> 解析@clc注解 使用 </p>
+ * <p> 解析@MyAnnotation注解  使用 </p>
  *
  * <pre>
  * @author wuxiongbo
@@ -29,10 +29,10 @@ import java.util.List;
  */
 @Aspect //来定义一个切面
 @Component
-public class ClcAop {
+public class MyAop {
 
     //定义切入点
-    @Pointcut("@annotation(com.example.annotation.Clc)")
+    @Pointcut("@annotation(com.example.annotation.MyAnnotation)")
     public void auditAspect() {
         System.out.println("1221212132");
     }
@@ -183,12 +183,12 @@ public class ClcAop {
         }
 
         // 获取注解
-        Clc annotation;
+        MyAnnotation annotation;
         String annotationName;
         try {
             // 获取注解，方式一：获取执行方法的全部值类型 以及 执行方法名。然后，用反射， 用目标类对象直接获取执行方法。
             Method targetMethod1 = targetClass.getMethod(targetMethodName, parameterTypes);
-            annotation = targetMethod1.getAnnotation(Clc.class);
+            annotation = targetMethod1.getAnnotation(MyAnnotation.class);
             //  问题： 通过签名获取的 targetMethod ，与 通过反射获取的 targetMethod1 有什么区别呢？
             //  targetMethod 是接口的方法
             //  targetMethod1 是具体的实现类的方法。
@@ -224,7 +224,7 @@ public class ClcAop {
                     // 对比 annotationDemo方法 中参数的个数。(因为可能方法重载，导致相同方法名存在多个方法)
                     if (parameterTypes.length == arguments.length) {
                         // 获取注解
-                        annotation = m.getAnnotation(Clc.class);
+                        annotation = m.getAnnotation(MyAnnotation.class);
 
                         // 打印后可以看出，获取的annotation 实际上是 Clc 的代理类。
                         annotationName = annotation.getClass().getName();

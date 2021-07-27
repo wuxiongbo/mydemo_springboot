@@ -1,6 +1,6 @@
 package com.example.controller;
 
-import com.example.annotation.Clc;
+import com.example.annotation.MyAnnotation;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -86,7 +86,7 @@ public class UserController {
     /**
      * 测试 自定义注解 aop
      */
-    @Clc(value = "value_demo", name = "name_demo")
+    @MyAnnotation(value = "value_demo", name = "name_demo")
     @RequestMapping(value = "/annotation", method = RequestMethod.GET)
     public String annotationDemo(@RequestParam("id")Integer id,@RequestParam("address")String address) {
         System.out.println("===开始执行 annotationDemo方法===");

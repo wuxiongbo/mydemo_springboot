@@ -1,7 +1,5 @@
 package com.example.annotation.helloworld;
 
-import com.example.annotation.Clc;
-
 /**
  * <p> 注解是什么？ </p>
  * 注解是一种继承自接口`java.lang.annotation.Annotation`的特殊接口
