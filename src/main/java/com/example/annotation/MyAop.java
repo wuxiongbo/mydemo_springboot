@@ -23,7 +23,7 @@ import java.util.List;
  * @author wuxiongbo
  * @date 2021/7/21
  * </pre>
- *
+ * com.example.annotation.MyAop
  * https://www.cnblogs.com/chenglc/p/9642891.html
  *
  */
@@ -31,7 +31,10 @@ import java.util.List;
 @Component
 public class MyAop {
 
-    //定义切入点
+    /**
+     * 定义切入点
+     * */
+//    @Pointcut("( execution(* com.example..*(..)) ) && @annotation(com.example.annotation.MyAnnotation)")
     @Pointcut("@annotation(com.example.annotation.MyAnnotation)")
     public void auditAspect() {
         System.out.println("1221212132");
@@ -44,6 +47,9 @@ public class MyAop {
      */
     @Before("auditAspect()")
     public void doBefore(JoinPoint joinPoint) {
+        Object target = joinPoint.getTarget();
+        String methodName = joinPoint.getSignature().getName();
+
         System.out.println("方法执行前，触发 @Before(\"auditAspect()\")");
     }
 
