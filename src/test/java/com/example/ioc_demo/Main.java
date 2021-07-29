@@ -16,11 +16,15 @@ public class Main {
     public static void main(String[] args){
         ApplicationContext context = new AnnotationConfigApplicationContext(MainConfig.class);
 
-//        Object a = context.getBean("getA");
-//        Object a = context.getBean("callGetA");
-        Object a = context.getBean("a");
 
-        System.out.println(a);
+        Object a = context.getBean("a");
+        Object a1 = context.getBean("getA");
+        Object a2 = context.getBean("callGetA");
+
+
+        System.out.println("a:"+a.hashCode());
+        System.out.println("a1:"+a1.hashCode());
+        System.out.println("a2:"+a2.hashCode());
 
     }
 }
