@@ -25,7 +25,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @Configuration
 @EnableSwagger2
-// 使用注解@ConditionalOnProperty
+// 使用注解@ConditionalOnProperty  对暴露api进行开关控制。
 @ConditionalOnProperty(prefix = "swagger",value = {"enable"},havingValue = "true")
 public class SwaggerConfig {
     @Bean
@@ -54,8 +54,7 @@ public class SwaggerConfig {
                 .description("描述：SpringBoot整合Swagger，详细文档信息......")
                 .contact(new Contact("链接1 demo：csdn博客地址","http://blog.csdn.net","mrwxb@foxmail.com"))
                 .version("版本号：1.0")
-                .license("链接2 demo：The Apache License")
-                .licenseUrl("http://www.baidu.com")
+                .license("链接2 demo：The Apache License").licenseUrl("http://www.baidu.com")
                 .build();
     }
 

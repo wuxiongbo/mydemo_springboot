@@ -5,9 +5,9 @@ import org.springframework.context.annotation.*;
 /**
  * Created by xsls on 2019/7/15.
  */
-@Configuration
-@Import(value = {CompentC.class,TulingImportSelect.class,TulingImportBeanfinitionRegister.class})
-@ComponentScan(basePackages = {"com.tuling.parsebeandefinition"})
+//@Configuration
+//@Import(value = {CompentC.class,TulingImportSelect.class,TulingImportBeanfinitionRegister.class})
+//@ComponentScan(basePackages = {"com.tuling.parsebeandefinition"})
 public class MainConfig {
 
 	@Bean

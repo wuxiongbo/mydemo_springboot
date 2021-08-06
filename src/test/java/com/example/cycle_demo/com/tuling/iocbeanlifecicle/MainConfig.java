@@ -6,8 +6,8 @@ import org.springframework.stereotype.Controller;
 /**
  * Created by xsls on 2019/8/15.
  */
-@Configuration
-@ComponentScan(basePackages = {"com.tuling.iocbeanlifecicle"})
+//@Configuration
+//@ComponentScan(basePackages = {"com.tuling.iocbeanlifecicle"})
         //excludeFilters={@ComponentScan.Filter(type=FilterType.ANNOTATION,value={Controller.class})})
 
 public class MainConfig {

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TulingDao {
 
-	@Autowired
+	@Autowired(required=false)
 	private TulingDataSource tulingDataSource;
 
 	public TulingDataSource getTulingDataSource() {

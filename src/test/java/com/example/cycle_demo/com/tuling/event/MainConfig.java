@@ -12,8 +12,8 @@ import org.springframework.scheduling.annotation.EnableAsync;
 /**
  * Created by xsls on 2019/7/15.
  */
-@Configuration
-@ComponentScan(basePackages = {"com.tuling.event"})
+//@Configuration
+//@ComponentScan(basePackages = {"com.example.cycle_demo.com.tuling.event"})
 //@EnableAsync  异步事件
 public class MainConfig {
 

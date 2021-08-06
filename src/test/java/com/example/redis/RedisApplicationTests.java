@@ -1,5 +1,6 @@
 package com.example.redis;
 
+import com.example.MongodbApplication;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.redisson.api.*;
@@ -25,7 +26,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2021/6/17
  * </pre>
  */
-@SpringBootTest
+@SpringBootTest(classes = MongodbApplication.class)
 @Slf4j
 public class RedisApplicationTests {
 
