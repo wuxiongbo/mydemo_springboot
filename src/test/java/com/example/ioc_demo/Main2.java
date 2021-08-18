@@ -9,7 +9,7 @@ import org.springframework.core.io.support.ResourcePatternUtils;
 import java.io.IOException;
 
 /**
- * <p>扫描器</p>
+ * <p> spring内置扫描器 </p>
  *
  * <pre>
  * @author wuxiongbo

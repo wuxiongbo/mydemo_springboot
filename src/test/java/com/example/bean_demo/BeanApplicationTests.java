@@ -1,4 +1,4 @@
-package com.example.beanDemo;
+package com.example.bean_demo;
 
 import com.outside.Student;
 import com.outside.StudentAnnotation;
@@ -11,7 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
  * <p> 通过 自定注解将扫描范围以外的指定类 交给spring托管 </p>
  *
  * @StudentAnnotation  自定义注解
- * com.outside.Student  springboot扫描范围之外的类
+ *
+ * 本示例中，springboot扫描范围之外的类：  com.outside.Student
  *
  * <pre>
  * @author wuxiongbo
