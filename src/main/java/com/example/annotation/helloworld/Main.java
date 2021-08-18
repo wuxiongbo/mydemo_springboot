@@ -1,5 +1,7 @@
 package com.example.annotation.helloworld;
 
+import java.lang.annotation.Annotation;
+
 /**
  * <p> 注解是什么？ </p>
  * 注解是一种继承自接口`java.lang.annotation.Annotation`的特殊接口
@@ -35,6 +37,9 @@ public class Main {
 
         // 打印出来，看到注解的实现 是个代理类。  com.sun.proxy.$Proxy1
         System.out.println(annotation.getClass().getName());
+
+        Class<? extends Annotation> aClass = annotation.annotationType();
+        System.out.println(aClass);
     }
 
 }

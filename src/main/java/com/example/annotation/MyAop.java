@@ -24,6 +24,8 @@ import java.util.List;
  * @date 2021/7/21
  * </pre>
  * com.example.annotation.MyAop
+ *
+ * aop+自定义注解
  * https://www.cnblogs.com/chenglc/p/9642891.html
  *
  */
@@ -33,6 +35,9 @@ public class MyAop {
 
     /**
      * 定义切入点
+     *
+     * 两种写法。
+     *
      * */
 //    @Pointcut("( execution(* com.example..*(..)) ) && @annotation(com.example.annotation.MyAnnotation)")
     @Pointcut("@annotation(com.example.annotation.MyAnnotation)")
@@ -120,7 +125,7 @@ public class MyAop {
 
 
 
-        } // 环绕增强 @around  放行。  proceed()结束。 可获取 result
+        } // 环绕增强 @around  放行。  proceed()结束。 可获取 被增强方法本体执行的结果 result
 
 */
 
