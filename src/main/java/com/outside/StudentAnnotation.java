@@ -20,7 +20,7 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE) //使用位置 （TYPE 类，METHOD 方法）
 @Retention(RetentionPolicy.RUNTIME) //加载到jvm里运行
 
-// 将Student 托管给spring
+// 通过 @Import注解，手动的 将扫描范围以外的bean -- Student 交给spring托管
 @Import(Student.class)
 public @interface StudentAnnotation {
     String value() default "";           //注解的属性。 如果只有一个属性，一般叫value

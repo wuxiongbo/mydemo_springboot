@@ -1,7 +1,7 @@
 package com.example.annotation;
 
 /**
- * <p>描述类的信息</p>
+ * <p> MyAOP 中用到 </p>
  *
  * <pre>
  * @author wuxiongbo
