@@ -1,8 +1,11 @@
 package com.example.controller;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 /**
  * <p>描述类的信息</p>
@@ -46,5 +49,10 @@ public class User {
     private String username;
     @ApiModelProperty(value = "用户地址")
     private String address;
+
+    @ApiModelProperty(value = "请求时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private LocalDateTime time;
+
 }
 

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.XAccountInfoMapper">
+  <resultMap id="BaseResultMap" type="com.example.domain.XAccountInfo">
+    <!--@mbg.generated-->
+    <!--@Table x_account_info-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="aid" jdbcType="BIGINT" property="aid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="region_str" jdbcType="VARCHAR" property="regionStr" />
+    <result column="idcard_num" jdbcType="VARCHAR" property="idcardNum" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    `id`, aid, `name`, region_str, idcard_num, create_time, update_time, `status`
+  </sql>
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from x_account_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectByCondition" resultMap="BaseResultMap">
+    select
+    <if test="status==null">
+      '空' test,
+    </if>
+    <if test="status==''">
+       '零' test,
+    </if>
+    <if test="status==null and status==''">
+      `status` = #{status};
+    </if>
+    <include refid="Base_Column_List" />
+    from x_account_info
+  </select>
+
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from x_account_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.domain.XAccountInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into x_account_info (aid, `name`, region_str, 
+      idcard_num, create_time, update_time, 
+      `status`)
+    values (#{aid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{regionStr,jdbcType=VARCHAR}, 
+      #{idcardNum,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, 
+      #{status,jdbcType=BOOLEAN})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.domain.XAccountInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into x_account_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aid != null">
+        aid,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="regionStr != null">
+        region_str,
+      </if>
+      <if test="idcardNum != null">
+        idcard_num,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aid != null">
+        #{aid,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="regionStr != null">
+        #{regionStr,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardNum != null">
+        #{idcardNum,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BOOLEAN},
+      </if>
+    </trim>
+  </insert>
+
+
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.domain.XAccountInfo">
+    <!--@mbg.generated-->
+    update x_account_info
+    <set>
+      <if test="aid != null">
+        aid = #{aid,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="regionStr != null">
+        region_str = #{regionStr,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardNum != null">
+        idcard_num = #{idcardNum,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=BOOLEAN},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.domain.XAccountInfo">
+    <!--@mbg.generated-->
+    update x_account_info
+    set aid = #{aid,jdbcType=BIGINT},
+      `name` = #{name,jdbcType=VARCHAR},
+      region_str = #{regionStr,jdbcType=VARCHAR},
+      idcard_num = #{idcardNum,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      `status` = #{status,jdbcType=BOOLEAN}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+</mapper>
