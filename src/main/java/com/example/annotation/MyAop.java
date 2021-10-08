@@ -6,15 +6,23 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.asm.ClassReader;
 import org.springframework.core.DefaultParameterNameDiscoverer;
+import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.beans.PropertyDescriptor;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Executable;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <p> 解析@MyAnnotation注解  使用 </p>
@@ -154,13 +162,16 @@ public class MyAop {
         //返回当前连接点签名
         Signature signature = joinPoint.getSignature();
 
-           //获得执行方法的方法名方式二（短名）：先获取 Method ，再通过 Method获取 methodName
+
+        //获得执行方法的方法名方式一（短名）：直接通过 Signature 签名获取 methodName
+        String targetMethodName1 = signature.getName();
+        System.out.println("Signature 获取的方法名："+targetMethodName1);
+
+
+        //获得执行方法的方法名方式二（短名）：先获取 Method ，再通过 Method获取 methodName
         if (!(signature instanceof MethodSignature)) {
             throw new IllegalArgumentException("该注解只能用于方法");
         }
-
-
-
         MethodSignature methodSignature = (MethodSignature) signature;
         Method targetMethod = methodSignature.getMethod();
         String targetMethodName = targetMethod.getName();
@@ -170,9 +181,6 @@ public class MyAop {
             // 获取方法的  返回值  类型
         Class<?> returnType = targetMethod.getReturnType();
 
-           //获得执行方法的方法名方式一（短名）：直接通过 Signature 签名获取 methodName
-        targetMethodName = signature.getName();
-        System.out.println("Signature 获取的方法名："+targetMethodName);
 
 
 
@@ -266,7 +274,7 @@ public class MyAop {
      *   方法参数：(Integer id,String address)
      *
      *   parameterNames 存的是 参数名，即 "id"、"address"
-     *   argValues 存的是 参数的值或实例，即 11111、"中国"
+     *   argValues      存的是 参数的值或实例，即 11111、"中国"
      *
      */
     // 参数名 列表

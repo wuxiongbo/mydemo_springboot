@@ -29,19 +29,23 @@ class MongodbApplicationTests {
 //        log.info("Insert: " + p);
 
         // 查询文档
-        p = mongoOps.findById(1, Product.class);
-        log.info("Found: " + p);
+//        p = mongoOps.findById(1, Product.class);
+//        log.info("Found: " + p);
 
+        // 查询条件
         Criteria criteria = new Criteria();
-        criteria.where("_id").is(1);
-
+        criteria.where("quantity").is(16).and("sku").is("abc123");
+//        Criteria criteria1 = new Criteria();
+        // 构建查询对象
         Query query = new Query();
         query.addCriteria(criteria);
+//        query.addCriteria(criteria1);
 
+        // 更新文档
         Update update = new Update();
-        update.inc("quantity");
-        mongoOps.updateFirst(query,update,Product.class);
-
+        update.inc("quantity"); // 自增长
+//        mongoOps.updateFirst(query,update,Product.class);
+        mongoOps.upsert(query,update,Product.class);
     }
 
 }

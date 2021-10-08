@@ -94,8 +94,6 @@ public class UserController {
 
 
 
-
-
     @PostMapping("/addUser")
     public User add(@RequestBody User user) {
 
@@ -140,7 +138,8 @@ public class UserController {
      * 测试 自定义注解 aop
      */
     @MyAnnotation(value = "value_demo", name = "name_demo")
-    @RequestMapping(value = "/annotation", method = RequestMethod.GET)
+    @GetMapping("/annotation")
+//    @RequestMapping(value = "/annotation", method = RequestMethod.GET)
     public String annotationDemo(@RequestParam("id")Integer id,@RequestParam("address")String address) {
         System.out.println("===开始执行 annotationDemo方法===");
 
