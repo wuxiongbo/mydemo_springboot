@@ -19,10 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URI;
 import java.security.KeyFactory;
 import java.security.PublicKey;
@@ -60,6 +57,17 @@ public class UserController {
     @Autowired
     XAccountInfoService xAccountInfoService;
 
+
+
+    /**
+     * 欢迎页面, 检查后端服务是否启动
+     *
+     * @return
+     */
+    @RequestMapping(value = "/welcome", method = RequestMethod.GET)
+    public String welcome() {
+        return "welcome mongo";
+    }
 
 
     @PostMapping("/add")
@@ -140,6 +148,7 @@ public class UserController {
     @MyAnnotation(value = "value_demo", name = "name_demo")
     @GetMapping("/annotation")
 //    @RequestMapping(value = "/annotation", method = RequestMethod.GET)
+//    http://127.0.0.1:9191/user/annotation?id=0&address='12312'
     public String annotationDemo(@RequestParam("id")Integer id,@RequestParam("address")String address) {
         System.out.println("===开始执行 annotationDemo方法===");
 
@@ -158,5 +167,28 @@ public class UserController {
         return xAccountInfoService.selectByCondition(req);
     }
 
+
+    @PostMapping("/urldemo")
+    public String urldemo(HttpServletRequest request) {
+        PrintStream out = System.out;
+
+        String getContextPath = request.getContextPath();
+        String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+getContextPath+"/";
+        String getRemoteAddress=request.getRemoteAddr();
+
+        String getServletPath =request.getServletPath();
+        String getRequestURI =request.getRequestURI();
+
+        String getQueryString =request.getQueryString();
+        String getRemoteUser =request.getRemoteUser();
+        out.println("getContextPath:"+ getContextPath +"<br>");
+        out.println("basePath:"+basePath+"<br>");
+        out.println("getRemoteAddress:"+ getRemoteAddress +"<br>");
+        out.println("getServletPath:"+ getServletPath +"<br>");
+        out.println("getRequestURI:"+ getRequestURI +"<br>");
+        out.println("getQueryString:"+ getQueryString +"<br>");
+        out.println("getRemoteUser:"+ getRemoteUser +"<br>");
+        return null;
+    }
 }
 

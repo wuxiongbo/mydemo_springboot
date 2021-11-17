@@ -277,9 +277,9 @@ public class MyAop {
      *   argValues      存的是 参数的值或实例，即 11111、"中国"
      *
      */
-    // 参数名 列表
+    // 参数名 列表。   用spring获取
     private List<String> parameterNames;
-    // 参数值 列表
+    // 参数值 列表。   通过切点获取
     private Object[] argValues;
 
     private Object resolveFromObject() {
