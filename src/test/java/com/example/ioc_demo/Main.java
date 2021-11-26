@@ -1,6 +1,6 @@
 package com.example.ioc_demo;
 
-import com.example.config.MainConfig;
+import com.example.config.demo.MainConfig;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

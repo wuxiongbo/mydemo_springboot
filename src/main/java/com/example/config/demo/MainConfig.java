@@ -1,13 +1,9 @@
-package com.example.config;
+package com.example.config.demo;
 
-import com.example.config.bean.A;
-import com.example.config.bean1.B;
-import com.example.config.bean2.C;
+import com.example.config.demo.bean.A;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.stereotype.Component;
 
 /**
  * <p>主配置类 demo</p>
@@ -25,7 +21,7 @@ import org.springframework.stereotype.Component;
 // Lite配置类
 //@Component
 
-@ComponentScan("com.example.config.bean")
+@ComponentScan("com.example.config.demo.bean")
 //@Import({C.class,B.class})
 public class MainConfig {
 

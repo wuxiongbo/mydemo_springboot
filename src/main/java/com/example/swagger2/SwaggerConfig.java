@@ -31,11 +31,13 @@ public class SwaggerConfig {
     @Bean
     public Docket createRestApi() {
         /*
-         * 这里采用包含注解的方式来确定要显示的接口
+         * 可以采用 ‘包含注解’ 的方式来确定要显示的接口
          * apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
          *
-         * 还可以采用包扫描的方式来确定要显示的接口
+         * 还可以采用 ‘包扫描’  的方式来确定要显示的接口
          * apis(RequestHandlerSelectors.basePackage("com.example.controller"))
+         *
+         * 这里采用 注册方式。
          */
         return new Docket(DocumentationType.SWAGGER_2)
                 .pathMapping("/")
@@ -52,9 +54,9 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("标题演示：SpringBoot整合Swagger")
                 .description("描述：SpringBoot整合Swagger，详细文档信息......")
-                .contact(new Contact("链接1 demo：csdn博客地址","http://blog.csdn.net","mrwxb@foxmail.com"))
+                .contact(new Contact("内容详情：链接1 demo，CSDN博客地址，邮箱","http://blog.csdn.net","mrwxb@foxmail.com"))
                 .version("版本号：1.0")
-                .license("链接2 demo：The Apache License").licenseUrl("http://www.baidu.com")
+                .license("版权信息：链接2 demo，The Apache License").licenseUrl("http://www.baidu.com")
                 .build();
     }
 

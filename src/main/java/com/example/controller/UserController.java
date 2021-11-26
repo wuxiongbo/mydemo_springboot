@@ -1,31 +1,18 @@
 package com.example.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.aliyun.oss.common.utils.BinaryUtil;
 import com.example.annotation.MyAnnotation;
+import com.example.domain.User;
 import com.example.domain.XAccountInfo;
 import com.example.service.XAccountInfoService;
-import com.example.util.MyUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import lombok.extern.log4j.Log4j2;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.net.URI;
-import java.security.KeyFactory;
-import java.security.PublicKey;
-import java.security.spec.X509EncodedKeySpec;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>swagger2 演示案例</p>
@@ -49,8 +36,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/user")
-// 用来标记当前Controller的功能
-@Api(tags = "用户管理相关接口")
+@Api(tags = "用户管理相关接口")  // swagger： Api 用来标记当前Controller的功能
 @Log4j2
 public class UserController {
 
@@ -58,51 +44,21 @@ public class UserController {
     XAccountInfoService xAccountInfoService;
 
 
-
-    /**
-     * 欢迎页面, 检查后端服务是否启动
-     *
-     * @return
-     */
-    @RequestMapping(value = "/welcome", method = RequestMethod.GET)
-    public String welcome() {
-        return "welcome mongo";
-    }
-
-
-    @PostMapping("/add")
-//    用来描述方法。
+//    swagger： ApiOperation 用来描述方法。
     @ApiOperation("添加用户的接口")
-//    用来描述参数。可以配置参数的中文含义，也可以给参数设置默认值
+//    swagger： ApiImplicitParams用来描述方法参数。可以配置参数的中文含义，也可以给参数设置默认值
     @ApiImplicitParams({
             @ApiImplicitParam(name = "username", value = "用户名", defaultValue = "李四"),
             @ApiImplicitParam(name = "address", value = "用户地址", defaultValue = "深圳", required = true)
     })
-//    @MyAnnotation(value = "value_demo", name = "name_demo")
-    public String addUser(
-            /*@RequestParam("username")
-                    String username,
-
-            @RequestParam(value = "address",required = true)
-                    String address*/
-            @RequestBody Map<String, Object> body,HttpServletRequest request)
-    {
-
-        System.out.println(body);
-
-        String ossCallbackBody = JSONObject.toJSONString(body);
-        try {
-            MyUtil.verifyOSSCallbackRequest(request,ossCallbackBody);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return "{\"Status\":\"OK\"}";
-    }
-
-
-
-    @PostMapping("/addUser")
+//    swagger： ApiResponses 用来描述返回参数。可以配置参数的中文含义，也可以给参数设置默认值
+    @ApiResponses({
+            @ApiResponse(code = 1, message = "添加成功，"),
+            @ApiResponse(code = 2, message = "添加失败"),
+            @ApiResponse(code = 3, message = "内部错误"),
+            @ApiResponse(code = 4, message = "其他错误")
+    })
+    @PostMapping("/add")
     public User add(@RequestBody User user) {
 
         System.out.println(user);
@@ -168,7 +124,7 @@ public class UserController {
     }
 
 
-    @PostMapping("/urldemo")
+    @PostMapping("/urlDemo")
     public String urldemo(HttpServletRequest request) {
         PrintStream out = System.out;
 

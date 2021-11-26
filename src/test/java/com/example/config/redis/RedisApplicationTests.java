@@ -1,4 +1,4 @@
-package com.example.redis;
+package com.example.config.redis;
 
 import com.example.MongodbApplication;
 import lombok.extern.slf4j.Slf4j;
@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.redisson.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -34,26 +32,37 @@ public class RedisApplicationTests {
     private RedissonClient redissonClient;
 
     /**
+     * redis数据结构1：string
+     *
      * 如果不设置redisson的序列化方式，这里会报错
      */
     @Test
-    void stringTest(){
+    void string(){
 
         // set String
         RBucket<Object> bucket = redissonClient.getBucket("stringTest");
         bucket.set("中国");
+
+
+        // update String
         bucket.compareAndSet("中国","日本");
+
 
         // 设置过期时间
         bucket.expire(10, TimeUnit.SECONDS);
+
 
         // get String
         bucket = redissonClient.getBucket("user:login:token:75517a0a486ca7fbd5e9330a270849f1");
         System.out.println(bucket.get());
     }
 
+
+    /**
+     * redis数据结构2：list
+     */
     @Test
-    void listTest(){
+    void list(){
 
         List<String> strList = new ArrayList<String>(){{
             add("1");
@@ -61,27 +70,38 @@ public class RedisApplicationTests {
             add("3");
         }};
 
+
         // set List
         RList<Object> rList = redissonClient.getList("listTest");
         rList.addAll(strList);
+
 
         // get List
         rList = redissonClient.getList("listTest");
         List<Object> objects = rList.readAll();
 
+
         System.out.println(objects);
     }
 
+
+    /**
+     * redis数据结构3：hash
+     */
     @Test
-    void hashTest(){
+    void hash(){
         Map<String,String> map = new HashMap<String,String>(){{
             put("id","2");
             put("name","3");
         }};
 
+
+
         // set map
         RMap<Object, Object> rMap = redissonClient.getMap("hashTest");
         rMap.putAll(map);
+
+
 
         // get map
         Map<Object, Object> hash = rMap.readAllMap();
@@ -89,27 +109,41 @@ public class RedisApplicationTests {
 
     }
 
+
+    /**
+     * redis数据结构4：set
+     */
     @Test
-    void setTest(){
+    void set(){
         List<String> strList = new ArrayList<String>(){{
             add("1");
             add("2");
             add("3");
         }};
 
+
+        // set Set
         RSet<Object> rSet = redissonClient.getSet("setTest");
         rSet.addAll(strList);
 
+
+        // get Set
         rSet = redissonClient.getSet("setTest");
         Set<Object> objects = rSet.readAll();
         System.out.println(objects);
     }
 
+
+//========================================================================================
+
     @Test
     // https://www.codota.com/code/java/methods/org.redisson.api.RBucket/delete
     void delete(){
+
         // delete hash
         redissonClient.getBucket("hashTest").delete();
+
+        // delete list
         redissonClient.getList("listTest").delete();
     }
 
@@ -119,14 +153,18 @@ public class RedisApplicationTests {
      */
     @Test
     void beforeIncrement(){
+        // 1.初始化一个空的 String 桶
         RBucket<Object> bucket = redissonClient.getBucket("incrementTest");
+
         Object result = bucket.get();
         System.out.println(result);
     }
     @Test
     void increment(){
+        // 2.自增之后，再次看 刚初始化的 String 桶
         RAtomicLong atomicLong = redissonClient.getAtomicLong("incrementTest");
         long value = atomicLong.incrementAndGet();
+
         System.out.println(value);
     }
 

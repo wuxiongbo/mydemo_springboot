@@ -1,6 +1,5 @@
-package com.example.config.bean;
+package com.example.config.demo.bean;
 
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Component;
  * </pre>
  */
 @Component
-//@ComponentScan("com.example.config.bean1")
+//@ComponentScan("com.example.config.demo.bean1")
 public class A {
 
     public A() {

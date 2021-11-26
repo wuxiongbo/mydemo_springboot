@@ -1,7 +1,4 @@
-package com.example.config.bean1;
-
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Component;
+package com.example.config.demo.bean1;
 
 /**
  * <p>描述类的信息</p>
@@ -12,7 +9,7 @@ import org.springframework.stereotype.Component;
  * </pre>
  */
 //@Component
-//@ComponentScan("com.example.config.bean2")
+//@ComponentScan("com.example.config.demo.bean2")
 public class B {
     public B() {
         System.out.println("你好，我是 B");

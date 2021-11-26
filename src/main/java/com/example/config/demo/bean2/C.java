@@ -1,6 +1,4 @@
-package com.example.config.bean2;
-
-import org.springframework.stereotype.Component;
+package com.example.config.demo.bean2;
 
 /**
  * <p>描述类的信息</p>
