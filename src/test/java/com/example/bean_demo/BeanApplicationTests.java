@@ -1,5 +1,6 @@
 package com.example.bean_demo;
 
+import com.example.config.demo.ConfigDemo;
 import com.outside.Student;
 import com.outside.StudentAnnotation;
 import lombok.extern.slf4j.Slf4j;
@@ -26,9 +27,12 @@ public class BeanApplicationTests {
 
     @Autowired
     private Student student;
-
+    @Autowired
+    private ConfigDemo configDemo;
     @Test
     void test(){
-        student.study();
+//        student.study();
+        String name = configDemo.getName();
+        System.out.println(name);
     }
 }

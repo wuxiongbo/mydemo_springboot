@@ -1,13 +1,6 @@
 package com.example.util.requestUtil;
 
-/**
- * <p>描述类的信息</p>
- *
- * <pre>
- * @author wuxiongbo
- * @date 2021/8/16
- * </pre>
- */
+
 import com.google.gson.Gson;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;

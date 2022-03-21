@@ -139,8 +139,7 @@ public class MyAop {
 
 
     /**
-     * 获取注解中对方法的描述信息
-     *     全部信息均从 JoinPoint 中获取
+     * 获取注解中对方法的描述信息   （全部信息均从 JoinPoint 中获取）
      * @param joinPoint 切点
      * @return 方法描述
      */
@@ -183,11 +182,10 @@ public class MyAop {
 
 
 
-
-        // 获取 参数名。 用spring的方式
+        // 获取方法的 参数名。 用spring的方式获取
         ParameterNameDiscoverer parameterNameDiscoverer = new DefaultParameterNameDiscoverer();
         String[] parameterNames = parameterNameDiscoverer.getParameterNames(targetMethod);
-        // 获取 参数值。 通过切点获取
+        // 获取方法的 参数值。 通过切点获取
         Object[] arguments = joinPoint.getArgs();
 
         for (int i = 0; i < arguments.length; i++) {
@@ -274,7 +272,7 @@ public class MyAop {
      *   方法参数：(Integer id,String address)
      *
      *   parameterNames 存的是 参数名，即 "id"、"address"
-     *   argValues      存的是 参数的值或实例，即 11111、"中国"
+     *   argValues      存的是 参数的 值 或 实例，即 11111、"中国"
      *
      */
     // 参数名 列表。   用spring获取

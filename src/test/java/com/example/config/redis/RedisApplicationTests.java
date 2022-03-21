@@ -53,8 +53,9 @@ public class RedisApplicationTests {
 
 
         // get String
-        bucket = redissonClient.getBucket("user:login:token:75517a0a486ca7fbd5e9330a270849f1");
-        System.out.println(bucket.get());
+        bucket = redissonClient.getBucket("stringTest");
+        String str = (String)bucket.get();
+        System.out.println(str);
     }
 
 
@@ -167,5 +168,12 @@ public class RedisApplicationTests {
 
         System.out.println(value);
     }
+    @Test
+    void expire(){
+        RBucket<Object> bucket = redissonClient.getBucket("incrementTest");
+        bucket.expire(10, TimeUnit.SECONDS);
 
+        bucket = redissonClient.getBucket("setTest");
+        bucket.expire(10, TimeUnit.SECONDS);
+    }
 }

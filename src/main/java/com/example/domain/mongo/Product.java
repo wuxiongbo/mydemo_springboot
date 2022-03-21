@@ -22,7 +22,7 @@ import javax.validation.Valid;
 public class Product {
     String sku;
     Integer quantity;
-//    @Valid // 嵌套验证必须用@Valid
+//    @Valid   // 引用对象的嵌套验证，必须用 @Valid
     Metric metrics;
 
     @Data

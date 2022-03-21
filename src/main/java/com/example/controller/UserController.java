@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -46,11 +46,6 @@ public class UserController {
 
 //    swagger： ApiOperation 用来描述方法。
     @ApiOperation("添加用户的接口")
-//    swagger： ApiImplicitParams用来描述方法参数。可以配置参数的中文含义，也可以给参数设置默认值
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "username", value = "用户名", defaultValue = "李四"),
-            @ApiImplicitParam(name = "address", value = "用户地址", defaultValue = "深圳", required = true)
-    })
 //    swagger： ApiResponses 用来描述返回参数。可以配置参数的中文含义，也可以给参数设置默认值
     @ApiResponses({
             @ApiResponse(code = 1, message = "添加成功，"),
@@ -76,10 +71,14 @@ public class UserController {
     @GetMapping("/get")
     @ApiOperation("根据id查询用户的接口")
     @ApiImplicitParam(name = "id", value = "用户id", defaultValue = "99", required = true)
-    public User getUserById(@PathVariable @RequestParam("id")Integer id, HttpServletResponse response, HttpServletRequest request) {
+    public User getUserById(@RequestParam(value = "id",required = false)Integer id,
+                            @RequestParam(value = "address",required = false)String address,
+                            @RequestParam(value = "username",defaultValue = "123")String username) {
 
         User user = new User();
         user.setId(id);
+        user.setAddress(address);
+        user.setUsername(username);
         return user;
     }
 
@@ -101,10 +100,16 @@ public class UserController {
     /**
      * 测试 自定义注解 aop
      */
+    //    swagger： ApiImplicitParams 用来描述 方法参数。
+    //             name          接收参数名
+    //             value         接收参数的意义描述
+    //             defaultValue  参数的默认值
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "用户id", defaultValue = "0"),
+            @ApiImplicitParam(name = "address", value = "用户地址", defaultValue = "深圳", required = true)
+    })
     @MyAnnotation(value = "value_demo", name = "name_demo")
-    @GetMapping("/annotation")
-//    @RequestMapping(value = "/annotation", method = RequestMethod.GET)
-//    http://127.0.0.1:9191/user/annotation?id=0&address='12312'
+    @GetMapping("/annotation")   // @RequestMapping(value = "/annotation", method = RequestMethod.GET)
     public String annotationDemo(@RequestParam("id")Integer id,@RequestParam("address")String address) {
         System.out.println("===开始执行 annotationDemo方法===");
 
@@ -146,5 +151,45 @@ public class UserController {
         out.println("getRemoteUser:"+ getRemoteUser +"<br>");
         return null;
     }
+
+    // 127.0.0.1:9292/user/redirectDemo?data=-26,-75,-117,-24,-81,-107,49
+    @GetMapping("/redirectDemo")
+    public String redirectDemo(byte[] data) {
+        System.out.println(Arrays.toString(data));
+
+        String s = new String(data);
+        System.out.println(s);
+
+        byte a = Byte.MAX_VALUE;
+        byte b = Byte.MIN_VALUE;
+        int size = Byte.SIZE;
+
+
+        String binaryString = Integer.toBinaryString(24);
+        System.out.println(binaryString);
+
+        // 先,把它变为字符数组
+        char[] strToChar = s.toCharArray();
+        // 然后,通过 Integer 中的 toBinaryString 方法来一个一个转
+        for (char c : strToChar) {
+            String binStr = Integer.toBinaryString(c);
+            System.out.print(binStr);
+        }
+
+        return "success";
+    }
+
+
+
+    @PostMapping("/postDemo")
+    @ApiOperation("测试")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "form", dataType = "String", name = "name", value = "用户名称", required = true)
+    })
+    public String postDemo(@RequestParam("name")String name) {
+        System.out.println(name);
+        return "success";
+    }
+
 }
 
