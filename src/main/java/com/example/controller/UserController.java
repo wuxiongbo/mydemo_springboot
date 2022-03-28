@@ -91,7 +91,7 @@ public class UserController {
      */
     @PutMapping("/update/{id}")
     @ApiOperation("根据id更新用户的接口")
-    @MyAnnotation(value = "value_demo", name = "name_demo")
+    @MyAnnotation(value = "value_demo", name = "name_demo",primaryKey="user.id")
     public User updateUserById(@RequestBody User user, @PathVariable Integer id) {
         user.setId(id);
         return user;

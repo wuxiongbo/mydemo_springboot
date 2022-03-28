@@ -60,10 +60,15 @@ public class MyAop {
      */
     @Before("auditAspect()")
     public void doBefore(JoinPoint joinPoint) {
-        Object target = joinPoint.getTarget();
-        String methodName = joinPoint.getSignature().getName();
+        System.out.println("==开始== @Before(\"auditAspect()\")");
 
-        System.out.println("方法执行前，触发 @Before(\"auditAspect()\")");
+        try {
+            AopUtils.getControllerMethodDescription(joinPoint);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("==结束== @Before(\"auditAspect()\")");
     }
 
     /**
@@ -73,35 +78,31 @@ public class MyAop {
      */
     @AfterReturning("auditAspect()")
     public void doAfterReturning(JoinPoint joinPoint) {
-
-        System.out.println("方法执行后，触发 @AfterReturning(\"auditAspect()\")");
-
-        Object[] args = joinPoint.getArgs();
-        System.out.println("参数个数:"+args.length);
+        System.out.println("==开始== @AfterReturning(\"auditAspect()\")");
 
         try {
             AopUtils.getControllerMethodDescription(joinPoint);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
+        System.out.println("==结束== @AfterReturning(\"auditAspect()\")");
     }
 
 
     @Around("auditAspect()")
     public Object around (ProceedingJoinPoint joinPoint) {
         Object result = null;
-        Object target = joinPoint.getTarget();
-        String methodName = joinPoint.getSignature().getName();
 
         try {
 
-            System.out.println("触发 @Around(\"auditAspect()\")，before  proceed()");
-            System.out.println("=================================================");
+            System.out.println("开始触发 @Around(\"auditAspect()\")，  before  proceed()");
+            System.out.println("======================@Around开始===========================");
 
             result = joinPoint.proceed();
 
-            System.out.println("=================================================");
-            System.out.println("触发 @Around(\"auditAspect()\")，after  proceed() ");
+            System.out.println("======================@Around结束===========================");
+            System.out.println("结束触发 @Around(\"auditAspect()\")，   after  proceed() ");
 
         } catch (Throwable throwable) {
             throwable.printStackTrace();

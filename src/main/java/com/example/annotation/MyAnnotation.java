@@ -23,5 +23,5 @@ public @interface MyAnnotation {
     String value();              // 注解的属性，如果只有一个属性，一般叫value
     String name() default "";    // 定义name属性，默认值""，可以不写
 
-    int key() default 0;
+    String primaryKey() default "";
 }

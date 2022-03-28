@@ -14,6 +14,7 @@ import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.stereotype.Component;
 
 /**
+ * 消息监听器
  * @author ：楼兰
  * @date ：Created in 2020/10/22
  * @description:

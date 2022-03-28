@@ -1,8 +1,6 @@
 package com.example.mq.producer;
 
-import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.SendResult;
-import org.apache.rocketmq.spring.annotation.RocketMQTransactionListener;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
@@ -20,7 +18,6 @@ public class MqProducer {
 
     @Resource
     private RocketMQTemplate rocketMQTemplate;
-
 
 
     //发送普通消息的示例
