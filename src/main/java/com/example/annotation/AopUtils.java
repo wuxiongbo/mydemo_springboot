@@ -149,16 +149,16 @@ public class AopUtils {
     }
 
 
+    /**
+     * 本示例的切点为  annotationDemo 方法。
+     *   方法全名： {@link com.example.controller.UserController#annotationDemo}
+     *   方法参数：(Integer id,String address)
+     *
+     *   parameterNames  存 参数名。       即 "id"、"address"
+     *   argValues       存 参数的 值/实例。即 11111、"中国"
+     *
+     */
     public static class Resolver{
-        /**
-         * 本示例的切点为  annotationDemo 方法。
-         *   方法全名： {@link com.example.controller.UserController#annotationDemo}
-         *   方法参数：(Integer id,String address)
-         *
-         *   parameterNames  存 参数名。       即 "id"、"address"
-         *   argValues       存 参数的 值/实例。即 11111、"中国"
-         *
-         */
         // 参数名 列表。   可以用spring获取
         private final List<String> parameterNames;
         // 参数值 列表。   可以通过切点获取
