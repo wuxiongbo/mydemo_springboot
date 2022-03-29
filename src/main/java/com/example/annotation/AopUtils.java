@@ -49,16 +49,15 @@ public class AopUtils {
         // 获取 切点方法的
         // 1)方法名
         String targetMethodName = targetMethod.getName();
-        // 2)全部入参的 类型
+        // 2)方法 入参的 的类型
         Class<?>[] parameterTypes = targetMethod.getParameterTypes();
-        // 3)返回值  类型
+        // 3)方法 返回值 的类型
         Class<?> returnType = targetMethod.getReturnType();
-        // 4) 参数名 列表。 用spring的方式获取
+        // 4)方法 参数名 列表。 用spring的方式获取
         ParameterNameDiscoverer parameterNameDiscoverer = new DefaultParameterNameDiscoverer();
         String[] parameterNames = parameterNameDiscoverer.getParameterNames(targetMethod);
-        // 5) 参数值 列表。 通过切点获取
+        // 5)方法 参数值 列表。 通过切点获取
         Object[] arguments = joinPoint.getArgs();
-
 
         assert parameterNames != null;
         
