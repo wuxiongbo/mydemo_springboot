@@ -49,7 +49,7 @@ public class AopUtils {
         // 获取 切点方法的
         // 1)方法名
         String targetMethodName = targetMethod.getName();
-        // 2)方法 入参的 的类型
+        // 2)方法 入参的 的类型列表
         Class<?>[] parameterTypes = targetMethod.getParameterTypes();
         // 3)方法 返回值 的类型
         Class<?> returnType = targetMethod.getReturnType();
@@ -163,7 +163,6 @@ public class AopUtils {
         private final List<String> parameterNames;
         // 参数值 列表。   可以通过切点获取
         private final Object[] argValues;
-
 
         public Resolver(List<String> parameterNames, Object[] argValues) {
             this.parameterNames = parameterNames;
